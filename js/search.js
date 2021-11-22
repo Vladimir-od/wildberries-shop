@@ -24,17 +24,15 @@ const search = function () {
     })
   }
 
-  const getData = (value, category) => {
+  const getData = (value) => {
     fetch('db/db.json')
       .then((response) => {
         return response.json()
       })
       .then((data) => {
-        const array = category
-          ? data.filter((item) => {
-              return item[category] === value
-            })
-          : data
+        const array = data.filter(good => {
+          return good.name.toLowerCase().includes(value.toLowerCase())
+        })
         localStorage.setItem('goods', JSON.stringify(array))
         if (window.location.pathname !== '/goods.html') {
           window.location.href = '/goods.html'
@@ -46,7 +44,7 @@ const search = function () {
 
   searchBtn.addEventListener('click', function (e) {
     e.preventDefault()
-    console.dir(input.value)
+    getData(input.value)
   })
 }
 
