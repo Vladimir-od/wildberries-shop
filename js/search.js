@@ -25,12 +25,12 @@ const search = function () {
   }
 
   const getData = (value) => {
-    fetch('db/db.json')
+    fetch('https://willberries-shop-a2499-default-rtdb.firebaseio.com/db.json')
       .then((response) => {
         return response.json()
       })
       .then((data) => {
-        const array = data.filter(good => {
+        const array = data.filter((good) => {
           return good.name.toLowerCase().includes(value.toLowerCase())
         })
         localStorage.setItem('goods', JSON.stringify(array))
